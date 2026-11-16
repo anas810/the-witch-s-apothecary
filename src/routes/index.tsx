@@ -172,6 +172,7 @@ function Apothecary() {
         className="book-spread"
         aria-label="How to unlock The Witch"
         aria-hidden={!bookOpen}
+        inert={!bookOpen}
       >
         <Button
           variant="ghost"
