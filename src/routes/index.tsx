@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowUpRight, ChevronLeft, Volume2, VolumeX } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, LockKeyhole, Volume2, VolumeX } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import apothecaryRoom from "@/assets/apothecary-room.jpg";
@@ -68,7 +68,7 @@ function Apothecary() {
     filter.type = "lowpass";
     filter.frequency.value = 260;
     gain.gain.setValueAtTime(0.0001, context.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.08, context.currentTime + 0.055);
+    gain.gain.exponentialRampToValueAtTime(0.2, context.currentTime + 0.055);
     gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 0.32);
     oscillator.connect(filter).connect(gain).connect(context.destination);
     oscillator.start();
@@ -91,7 +91,7 @@ function Apothecary() {
     filter.type = "bandpass";
     filter.frequency.value = 1200;
     filter.Q.value = 0.7;
-    gain.gain.value = 0.16;
+    gain.gain.value = 0.2;
     source.connect(filter).connect(gain).connect(context.destination);
     source.start();
   };
@@ -201,7 +201,7 @@ function Apothecary() {
           <article className="page page-action">
             <span className="page-eyebrow">The final enchantment</span>
             <div className="lock-crest" aria-hidden="true">
-              <span className="lock-icon">♙</span>
+              <LockKeyhole className="lock-icon" aria-hidden="true" />
               <span className="crest-stars">✦</span>
             </div>
             <h2>Your story<br />awaits.</h2>
