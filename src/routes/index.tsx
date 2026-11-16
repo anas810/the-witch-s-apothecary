@@ -39,6 +39,8 @@ function Apothecary() {
   const [soundOn, setSoundOn] = useState(false);
   const audioContext = useRef<AudioContext | null>(null);
   const bubbleTimer = useRef<number | null>(null);
+  const bookButtonRef = useRef<HTMLButtonElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     return () => {
@@ -46,6 +48,11 @@ function Apothecary() {
       void audioContext.current?.close();
     };
   }, []);
+
+  useEffect(() => {
+    if (bookOpen) closeButtonRef.current?.focus();
+    else bookButtonRef.current?.focus();
+  }, [bookOpen]);
 
   const getAudioContext = () => {
     if (!audioContext.current) {
@@ -152,6 +159,7 @@ function Apothecary() {
             type="button"
             className="floating-book"
             aria-label="Open The Witch book"
+            ref={bookButtonRef}
             onClick={openBook}
           >
             <img src={witchCover} alt="The Witch by Freida McFadden, illustrated book cover" />
@@ -180,6 +188,7 @@ function Apothecary() {
           className="close-book"
           type="button"
           aria-label="Return to the apothecary"
+          ref={closeButtonRef}
           onClick={() => setBookOpen(false)}
           tabIndex={bookOpen ? 0 : -1}
         >
